@@ -1,5 +1,3 @@
 <Solution>
-  <Project Path="SBBSPrintHub.csproj">
-    <Deploy />
-  </Project>
+  <Project Path="SBBSPrintHub.csproj" />
 </Solution>
