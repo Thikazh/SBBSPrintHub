@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SBBSPrintHub.MainPage"
+             Title="Printer Counter">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="SBBS Printer Counter" FontSize="28" FontAttributes="Bold" />
+            <Frame BackgroundColor="{StaticResource PanelBackground}" BorderColor="#CBD5E1" CornerRadius="12">
+                <Grid ColumnDefinitions="*,Auto,Auto,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+                    <Label Text="Printer IP" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="From Date" Grid.Row="0" Grid.Column="1" />
+                    <Label Text="To Date" Grid.Row="0" Grid.Column="2" />
+
+                    <Entry x:Name="PrinterIpEntry" Grid.Row="1" Grid.Column="0" Text="192.168.2.50" />
+                    <DatePicker x:Name="FromDatePicker" Grid.Row="1" Grid.Column="1" />
+                    <DatePicker x:Name="ToDatePicker" Grid.Row="1" Grid.Column="2" />
+                    <Button Grid.Row="1" Grid.Column="3" Text="Capture Count" Clicked="OnCaptureClicked" />
+                </Grid>
+            </Frame>
+
+            <HorizontalStackLayout Spacing="12">
+                <Button Text="Apply Date Filter" Clicked="OnFilterClicked" />
+                <Button Text="Reload History" Clicked="OnReloadClicked" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="StatusLabel" TextColor="#475569" />
+
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" BackgroundColor="#E2E8F0">
+                <Grid Padding="8" ColumnDefinitions="1.4*,1.4*,*,1.4*,*,*" ColumnSpacing="8" BackgroundColor="#2563EB">
+                    <Label Text="Printer IP" TextColor="White" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="From Date" TextColor="White" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="From Count" TextColor="White" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="To Date" TextColor="White" FontAttributes="Bold" />
+                    <Label Grid.Column="4" Text="To Count" TextColor="White" FontAttributes="Bold" />
+                    <Label Grid.Column="5" Text="Printed Pages" TextColor="White" FontAttributes="Bold" />
+                </Grid>
+
+                <CollectionView x:Name="ReportGrid" Grid.Row="1" EmptyView="No records match the selected printer and date range.">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="8" ColumnDefinitions="1.4*,1.4*,*,1.4*,*,*" ColumnSpacing="8" BackgroundColor="White">
+                                <Label Text="{Binding PrinterIP}" />
+                                <Label Grid.Column="1" Text="{Binding FromDate, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+                                <Label Grid.Column="2" Text="{Binding FromCount}" />
+                                <Label Grid.Column="3" Text="{Binding ToDate, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+                                <Label Grid.Column="4" Text="{Binding ToCount}" />
+                                <Label Grid.Column="5" Text="{Binding PrintedPages}" FontAttributes="Bold" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
