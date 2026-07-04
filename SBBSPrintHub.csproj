@@ -8,6 +8,7 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <WindowsPackageType>None</WindowsPackageType>
 
     <ApplicationTitle>SBBS Print Hub</ApplicationTitle>
     <ApplicationId>com.sbbs.printhub</ApplicationId>

@@ -53,8 +53,8 @@ public partial class MainPage : ContentPage
     {
         reportRows.Clear();
         var printerIp = PrinterIpEntry.Text?.Trim() ?? string.Empty;
-        var fromDate = FromDatePicker.Date.Date;
-        var toDate = ToDatePicker.Date.Date.AddDays(1).AddTicks(-1);
+        var fromDate = FromDatePicker.Date.GetValueOrDefault(DateTime.Today).Date;
+        var toDate = ToDatePicker.Date.GetValueOrDefault(DateTime.Today).Date.AddDays(1).AddTicks(-1);
 
         if (toDate < fromDate)
         {
