@@ -2,9 +2,16 @@ namespace SBBSPrintHub;
 
 public partial class App : Application
 {
+    private readonly MainPage mainPage;
+
     public App(MainPage mainPage)
     {
         InitializeComponent();
-        MainPage = new NavigationPage(mainPage);
+        this.mainPage = mainPage;
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new NavigationPage(mainPage));
     }
 }

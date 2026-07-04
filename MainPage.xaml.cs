@@ -45,16 +45,25 @@ public partial class MainPage : ContentPage
 
     private async Task LoadHistoryAndFilterAsync()
     {
-        history = await printerCounterService.ReadHistoryAsync();
-        ApplyFilter();
+        try
+        {
+            history = await printerCounterService.ReadHistoryAsync();
+            ApplyFilter();
+        }
+        catch (Exception ex)
+        {
+            history = Array.Empty<PrinterHistory>();
+            reportRows.Clear();
+            StatusLabel.Text = $"Unable to load printer history: {ex.Message}";
+        }
     }
 
     private void ApplyFilter()
     {
         reportRows.Clear();
         var printerIp = PrinterIpEntry.Text?.Trim() ?? string.Empty;
-        var fromDate = FromDatePicker.Date.GetValueOrDefault(DateTime.Today).Date;
-        var toDate = ToDatePicker.Date.GetValueOrDefault(DateTime.Today).Date.AddDays(1).AddTicks(-1);
+        var fromDate = FromDatePicker.Date.Date;
+        var toDate = ToDatePicker.Date.Date.AddDays(1).AddTicks(-1);
 
         if (toDate < fromDate)
         {
